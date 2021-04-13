@@ -2,18 +2,15 @@
 
 ## Postres
 
-
 [Tarta de queso al horno](../recetas/postres/Tarta de queso al horno.pdf)
 
 
 ## Platos Principales
 
-
-[Tarta de queso al horno](../recetas/postres/Tarta de queso al horno.pdf)
+[Pollo al curry con arroz basmati](../recetas/platos/Pollo al curry con arroz basmati.pdf)
 
 
 ## Entrantes
-
 
 [Tarta de queso al horno](../recetas/postres/Tarta de queso al horno.pdf)
 
