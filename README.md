@@ -3,6 +3,6 @@
 ## Postres
 
 
-[Tarta de queso](../recetas/postres/Tarta de queso al horno.pdf)
+[Tarta de queso al horno](../recetas/postres/Tarta de queso al horno.pdf)
 
 
