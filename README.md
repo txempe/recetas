@@ -1,4 +1,4 @@
-## Welcome to GitHub Pages
+# Bienvenido a mi página de Recetas
 
 You can use the [editor on GitHub](https://github.com/txempe/recetas/edit/main/README.md) to maintain and preview the content for your website in Markdown files.
 
