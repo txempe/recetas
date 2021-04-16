@@ -6,7 +6,7 @@ $postres=$salida -Split([Environment]::NewLine) | Select-String -Pattern "postre
 $postres=$postres -Replace '"',''
 $postres=$postres -Replace '{path:postres/',''
 $postres=$postres -Replace '\.pdf',''
-write-host "# Bienvenido a mi página de Recetas`r`n"
+#write-host "# Bienvenido a mi página de Recetas`r`n"
 write-host "## Postres`r`n"
 $postres | Foreach-Object { write-host "[$_](../recetas/postres/${_}.pdf)`r`n"}
 
