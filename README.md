@@ -1,6 +1,6 @@
 # Bienvenido a mi página de Recetas
 
-## Postres
+## Postresitos
 
 [Pastel de arroz](../recetas/postres/Pastel de arroz.pdf)
 
