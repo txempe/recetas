@@ -20,6 +20,3 @@
 
 [Sopa de pescado](../recetas/platos/Sopa de pescado.pdf)
 
-
-
-## Entranteslast
