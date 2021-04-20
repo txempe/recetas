@@ -16,5 +16,7 @@
 
 [Pollo al curry con arroz basmati](../recetas/platos/Pollo al curry con arroz basmati.pdf)
 
+[Solomillo al horno con patatas](../recetas/platos/Solomillo al horno con patatas.pdf)
+
 [Sopa de pescado](../recetas/platos/Sopa de pescado.pdf)
 
