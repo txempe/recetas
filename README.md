@@ -4,7 +4,13 @@
 
 [Pastel Vasco](../recetas/postres/Pastel Vasco.pdf)
 
+[Tarta Cheesecake de vainilla y limón](../recetas/postres/Tarta Cheesecake de vainilla y limón.pdf)
+
 [Tarta de queso al horno](../recetas/postres/Tarta de queso al horno.pdf)
+
+[Tarta de queso estilo La Viña](../recetas/postres/Tarta de queso estilo La Viña.pdf)
+
+[Tarta de queso Manchego e Idiazabal](../recetas/postres/Tarta de queso Manchego e Idiazabal.pdf)
 
 [Tarta de queso](../recetas/postres/Tarta de queso.pdf)
 
