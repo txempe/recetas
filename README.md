@@ -20,6 +20,8 @@
 
 ## Platos
 
+[Carrilleras al vino tinto](../recetas/platos/Carrilleras al vino tinto.pdf)
+
 [Crema de pescado](../recetas/platos/Crema de pescado.pdf)
 
 [Pollo al curry con arroz basmati](../recetas/platos/Pollo al curry con arroz basmati.pdf)
