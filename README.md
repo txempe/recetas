@@ -17,7 +17,6 @@
 [Tarta de queso](../recetas/postres/Tarta de queso.pdf)
 
 
-
 ## Platos
 
 [Carrilleras al vino tinto](../recetas/platos/Carrilleras al vino tinto.pdf)
@@ -30,3 +29,7 @@
 
 [Sopa de pescado](../recetas/platos/Sopa de pescado.pdf)
 
+
+## Entrantes
+
+[Champis](../recetas/entrantes/Champis.pdf)
