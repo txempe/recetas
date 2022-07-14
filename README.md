@@ -19,6 +19,8 @@
 
 ## Platos
 
+[Arroz negro](../recetas/platos/Arroz negro.pdf)
+
 [Carrilleras al vino tinto](../recetas/platos/Carrilleras al vino tinto.pdf)
 
 [Crema de pescado](../recetas/platos/Crema de pescado.pdf)
