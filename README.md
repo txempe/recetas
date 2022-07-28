@@ -36,6 +36,8 @@
 
 ## Entrantes
 
+[Aliño ensalada](../recetas/entrantes/Aliño ensalada.pdf)
+
 [Champis](../recetas/entrantes/Champis.pdf)
 
 
