@@ -16,6 +16,8 @@
 
 [Tarta de queso](../recetas/postres/Tarta de queso.pdf)
 
+[Torrijas con nata](../recetas/postres/Torrijas con nata.pdf)
+
 
 ## Platos
 
