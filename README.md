@@ -27,6 +27,8 @@
 
 [Crema de pescado](../recetas/platos/Crema de pescado.pdf)
 
+[Habas con patatas](../recetas/platos/Habas con patatas.pdf)
+
 [Lasagna de verduras](../recetas/platos/Lasagna de verduras.pdf)
 
 [Pollo al curry con arroz basmati](../recetas/platos/Pollo al curry con arroz basmati.pdf)
