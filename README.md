@@ -42,6 +42,8 @@
 
 [Aliño ensalada](../recetas/entrantes/Aliño ensalada.pdf)
 
+[Mojito](../recetas/entrantes/Mojito con Bacardí, Sprite y hierbabuena.pdf)
+
 [Champis](../recetas/entrantes/Champis.pdf)
 
 
