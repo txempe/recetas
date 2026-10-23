@@ -1,71 +1,188 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Buscador de Recetas</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
+<title>Mis Recetas</title>
 
-        h1 {
-            margin-bottom: 20px;
-        }
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
-        h2 {
-            margin-top: 40px;
-            border-bottom: 2px solid #ddd;
-            padding-bottom: 5px;
-        }
+body{
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: linear-gradient(135deg,#f4f6f8,#e9eef3);
+    min-height:100vh;
+    color:#222;
+    padding:40px 20px;
+}
 
-        #buscar {
-            width: 100%;
-            padding: 12px;
-            font-size: 18px;
-            box-sizing: border-box;
-        }
+.container{
+    max-width:1200px;
+    margin:auto;
+}
 
-        .resultado {
-            padding: 8px 0;
-        }
+header{
+    text-align:center;
+    margin-bottom:35px;
+}
 
-        .resultado a {
-            text-decoration: none;
-            color: #0066cc;
-        }
+header h1{
+    font-size:3rem;
+    color:#1f2937;
+    margin-bottom:10px;
+}
 
-        .resultado a:hover {
-            text-decoration: underline;
-        }
+header p{
+    color:#6b7280;
+    font-size:1.1rem;
+}
 
-        .oculto {
-            display: none;
-        }
-    </style>
+.search-box{
+    position:relative;
+    margin-bottom:40px;
+}
+
+.search-box input{
+    width:100%;
+    padding:18px 20px 18px 55px;
+    border:none;
+    border-radius:16px;
+    font-size:1.1rem;
+    background:white;
+    box-shadow:0 5px 20px rgba(0,0,0,0.08);
+    transition:0.3s;
+}
+
+.search-box input:focus{
+    outline:none;
+    box-shadow:0 5px 25px rgba(59,130,246,0.3);
+}
+
+.search-box::before{
+    content:"🔍";
+    position:absolute;
+    left:18px;
+    top:16px;
+    font-size:22px;
+}
+
+.seccion{
+    background:white;
+    border-radius:20px;
+    padding:25px;
+    margin-bottom:30px;
+    box-shadow:0 5px 25px rgba(0,0,0,.08);
+}
+
+.seccion h2{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:20px;
+    color:#1f2937;
+}
+
+.contador{
+    background:#eef2ff;
+    color:#4338ca;
+    font-size:0.9rem;
+    padding:5px 12px;
+    border-radius:999px;
+}
+
+.lista{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+    gap:10px;
+}
+
+.resultado a{
+    display:block;
+    padding:14px 16px;
+    background:#f8fafc;
+    border:1px solid #e5e7eb;
+    border-radius:12px;
+    text-decoration:none;
+    color:#111827;
+    transition:.2s;
+}
+
+.resultado a:hover{
+    background:#2563eb;
+    color:white;
+    transform:translateY(-2px);
+}
+
+.sin-resultados{
+    color:#6b7280;
+    padding:10px 0;
+}
+
+footer{
+    text-align:center;
+    margin-top:40px;
+    color:#6b7280;
+    font-size:.9rem;
+}
+
+@media(max-width:768px){
+
+    header h1{
+        font-size:2rem;
+    }
+
+    .lista{
+        grid-template-columns:1fr;
+    }
+
+}
+</style>
 </head>
 <body>
 
-<h1>Buscador de Recetas</h1>
+<div class="container">
 
-<input
-    type="text"
-    id="buscar"
-    placeholder="Buscar receta..."
-    autofocus
->
+<header>
+    <h1>🍽️ Recetas</h1>
+</header>
 
-<h2>⭐ Favoritas</h2>
-<div id="favoritas"></div>
+<div class="search-box">
+    <input
+        type="text"
+        id="buscar"
+        placeholder="Buscar receta..."
+        autofocus>
+</div>
 
-<h2>📚 Todas las demás recetas</h2>
-<div id="resto"></div>
+<div class="seccion">
+    <h2>
+        ⭐ Favoritas
+        <span class="contador" id="countFavoritas">0</span>
+    </h2>
+    <div id="favoritas" class="lista"></div>
+</div>
+
+<div class="seccion">
+    <h2>
+        📚 Todas las recetas
+        <span class="contador" id="countResto">0</span>
+    </h2>
+    <div id="resto" class="lista"></div>
+</div>
+
+<footer>
+    Recetario personal · GitHub Pages
+</footer>
+
+</div>
 
 <script>
+
 fetch('pdfs.json')
 .then(response => response.json())
 .then(pdfs => {
@@ -78,7 +195,7 @@ fetch('pdfs.json')
         !pdf.ruta.toLowerCase().startsWith('favoritas/')
     );
 
-    function pintar(lista, contenedor, filtro) {
+    function pintar(lista, contenedor, contador, filtro){
 
         filtro = filtro.toLowerCase().trim();
 
@@ -86,23 +203,39 @@ fetch('pdfs.json')
             pdf.nombre.toLowerCase().includes(filtro)
         );
 
+        document.getElementById(contador).textContent =
+            encontrados.length;
+
         document.getElementById(contenedor).innerHTML =
             encontrados.length
                 ? encontrados.map(pdf => `
                     <div class="resultado">
                         <a href="${pdf.ruta}" target="_blank">
-                            ${pdf.nombre}
+                            📄 ${pdf.nombre}
                         </a>
                     </div>
                 `).join('')
-                : '<div class="resultado">Sin resultados</div>';
+                : '<div class="sin-resultados">No se encontraron recetas</div>';
     }
 
-    function actualizar() {
-        const filtro = document.getElementById('buscar').value;
+    function actualizar(){
 
-        pintar(favoritas, 'favoritas', filtro);
-        pintar(resto, 'resto', filtro);
+        const filtro =
+            document.getElementById('buscar').value;
+
+        pintar(
+            favoritas,
+            'favoritas',
+            'countFavoritas',
+            filtro
+        );
+
+        pintar(
+            resto,
+            'resto',
+            'countResto',
+            filtro
+        );
     }
 
     document
@@ -110,7 +243,9 @@ fetch('pdfs.json')
         .addEventListener('input', actualizar);
 
     actualizar();
+
 });
+
 </script>
 
 </body>
