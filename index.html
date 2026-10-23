@@ -1,25 +1,26 @@
 <!DOCTYPE html>
-<html lang="es">
+<html>
 <head>
-<meta charset="UTF-8">
-<title>Biblioteca recetas</title>
 
 /pagefind/pagefind-ui.css
 /pagefind/pagefind-ui.jsscript>
 
+<meta charset="utf-8">
+<title>Buscador de recetas</title>
+
 </head>
 <body>
 
-<h1>Biblioteca recetas</h1>
+<h1>Buscador de recetas PDF</h1>
 
 <div id="search"></div>
 
 <script>
 window.addEventListener('DOMContentLoaded', () => {
-    new PagefindUI({
-        element: "#search",
-        showSubResults: true
-    });
+  new PagefindUI({
+    element: "#search",
+    showSubResults: true
+  });
 });
 </script>
 
