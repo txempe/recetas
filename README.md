@@ -38,7 +38,7 @@
 [Sopa de pescado](../recetas/platos/Sopa de pescado.pdf)
 
 
-## Entrantes
+## Entrantess
 
 [Aliño ensalada](../recetas/entrantes/Aliño ensalada.pdf)
 
