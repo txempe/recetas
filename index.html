@@ -8,7 +8,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 40px auto;
             padding: 0 20px;
         }
@@ -17,80 +17,101 @@
             margin-bottom: 20px;
         }
 
+        h2 {
+            margin-top: 40px;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 5px;
+        }
+
         #buscar {
             width: 100%;
             padding: 12px;
-            font-size: 16px;
+            font-size: 18px;
             box-sizing: border-box;
         }
 
-        #resultados {
-            margin-top: 20px;
-        }
-
         .resultado {
-            padding: 10px;
-            border-bottom: 1px solid #ddd;
+            padding: 8px 0;
         }
 
         .resultado a {
             text-decoration: none;
             color: #0066cc;
-            font-size: 18px;
         }
 
         .resultado a:hover {
             text-decoration: underline;
         }
+
+        .oculto {
+            display: none;
+        }
     </style>
 </head>
 <body>
 
-    <h1>Buscador de Recetas</h1>
+<h1>Buscador de Recetas</h1>
 
-    <input
-        type="text"
-        id="buscar"
-        placeholder="Escribe parte del nombre de la receta..."
-        autofocus
-    >
+<input
+    type="text"
+    id="buscar"
+    placeholder="Buscar receta..."
+    autofocus
+>
 
-    <div id="resultados"></div>
+<h2>⭐ Favoritas</h2>
+<div id="favoritas"></div>
 
-    <script>
-        fetch('pdfs.json')
-        .then(response => response.json())
-        .then(pdfs => {
+<h2>📚 Todas las demás recetas</h2>
+<div id="resto"></div>
 
-            const buscar = document.getElementById('buscar');
-            const resultados = document.getElementById('resultados');
+<script>
+fetch('pdfs.json')
+.then(response => response.json())
+.then(pdfs => {
 
-            function mostrar(filtro) {
+    const favoritas = pdfs.filter(pdf =>
+        pdf.ruta.toLowerCase().startsWith('favoritas/')
+    );
 
-                filtro = filtro.toLowerCase().trim();
+    const resto = pdfs.filter(pdf =>
+        !pdf.ruta.toLowerCase().startsWith('favoritas/')
+    );
 
-                const encontrados = pdfs.filter(pdf =>
-                    pdf.nombre.toLowerCase().includes(filtro)
-                );
+    function pintar(lista, contenedor, filtro) {
 
-                resultados.innerHTML = encontrados.length
-                    ? encontrados.map(pdf => `
-                        <div class="resultado">
-                            <a href="${pdf.ruta}" target="_blank">
-                                ${pdf.nombre}
-                            </a>
-                        </div>
-                    `).join('')
-                    : '<p>No se encontraron resultados.</p>';
-            }
+        filtro = filtro.toLowerCase().trim();
 
-            buscar.addEventListener('input', e => {
-                mostrar(e.target.value);
-            });
+        const encontrados = lista.filter(pdf =>
+            pdf.nombre.toLowerCase().includes(filtro)
+        );
 
-            mostrar('');
-        });
-    </script>
+        document.getElementById(contenedor).innerHTML =
+            encontrados.length
+                ? encontrados.map(pdf => `
+                    <div class="resultado">
+                        <a href="${pdf.ruta}" target="_blank">
+                            ${pdf.nombre}
+                        </a>
+                    </div>
+                `).join('')
+                : '<div class="resultado">Sin resultados</div>';
+    }
+
+    function actualizar() {
+        const filtro = document.getElementById('buscar').value;
+
+        pintar(favoritas, 'favoritas', filtro);
+        pintar(resto, 'resto', filtro);
+    }
+
+    document
+        .getElementById('buscar')
+        .addEventListener('input', actualizar);
+
+    actualizar();
+});
+</script>
 
 </body>
 </html>
