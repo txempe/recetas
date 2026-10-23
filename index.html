@@ -2,27 +2,95 @@
 <html lang="es">
 <head>
     <meta charset="utf-8">
-    <title>Buscador de recetas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Buscador de recetas PDF</title>
 
-    <script src="/recetas/pagefind/pagefind-ui.js"></script>
-    <link href="/recetas/pagefind/pagefind-ui.css" rel="stylesheet" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
 
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        #buscar {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        #resultados {
+            margin-top: 20px;
+        }
+
+        .resultado {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .resultado a {
+            text-decoration: none;
+            color: #0066cc;
+            font-size: 18px;
+        }
+
+        .resultado a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
-
 <body>
 
-<h1>Buscador de recetas PDF</h1>
+    <h1>Buscador de recetas PDF</h1>
 
-<div id="search"></div>
+    <input
+        type="text"
+        id="buscar"
+        placeholder="Escribe parte del nombre de la receta..."
+        autofocus
+    >
 
-<script>
-window.addEventListener('DOMContentLoaded', () => {
-    new PagefindUI({
-        element: "#search",
-        showSubResults: true
-    });
-});
-</script>
+    <div id="resultados"></div>
+
+    <script>
+        fetch('pdfs.json')
+        .then(response => response.json())
+        .then(pdfs => {
+
+            const buscar = document.getElementById('buscar');
+            const resultados = document.getElementById('resultados');
+
+            function mostrar(filtro) {
+
+                filtro = filtro.toLowerCase().trim();
+
+                const encontrados = pdfs.filter(pdf =>
+                    pdf.nombre.toLowerCase().includes(filtro)
+                );
+
+                resultados.innerHTML = encontrados.length
+                    ? encontrados.map(pdf => `
+                        <div class="resultado">
+                            <a href="${pdf.ruta}" target="_blank">
+                                ${pdf.nombre}
+                            </a>
+                        </div>
+                    `).join('')
+                    : '<p>No se encontraron resultados.</p>';
+            }
+
+            buscar.addEventListener('input', e => {
+                mostrar(e.target.value);
+            });
+
+            mostrar('');
+        });
+    </script>
 
 </body>
 </html>
