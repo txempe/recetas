@@ -19,20 +19,41 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
+      - name: Generate pdfs.json
+        run: |
+          python3 << 'EOF'
+          import os
+          import json
 
-      - name: Install Pagefind
-        run: npm install -g pagefind
+          pdfs = []
 
-      - name: Generate Search Index
-        run: pagefind --site .
+          for carpeta in ["entrantes", "platos", "postres"]:
+              if not os.path.isdir(carpeta):
+                  continue
+
+              for raiz, dirs, archivos in os.walk(carpeta):
+                  for archivo in archivos:
+                      if archivo.lower().endswith(".pdf"):
+                          ruta = os.path.join(raiz, archivo).replace("\\", "/")
+
+                          pdfs.append({
+                              "nombre": os.path.splitext(archivo)[0],
+                              "ruta": ruta
+                          })
+
+          pdfs.sort(key=lambda x: x["nombre"].lower())
+
+          with open("pdfs.json", "w", encoding="utf-8") as f:
+              json.dump(pdfs, f, ensure_ascii=False, indent=2)
+
+          print(f"Generados {len(pdfs)} PDFs")
+          EOF
+
+      - name: Show pdfs.json
+        run: cat pdfs.json
 
       - name: Upload Pages Artifact
         uses: actions/upload-pages-artifact@v3
@@ -49,7 +70,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4
