@@ -1,4 +1,4 @@
-name: Deploy Site
+name: Build and Deploy
 
 on:
   push:
@@ -10,8 +10,11 @@ permissions:
   pages: write
   id-token: write
 
-jobs:
+concurrency:
+  group: pages
+  cancel-in-progress: true
 
+jobs:
   build:
     runs-on: ubuntu-latest
 
@@ -25,13 +28,55 @@ jobs:
       with:
         node-version: 22
 
-    - name: Install Pagefind
-      run: npm install -g pagefind
+    - name: Install dependencies
+      run: |
+        npm install -g pagefind
+        sudo apt-get update
+        sudo apt-get install -y poppler-utils
 
-    - name: Build Search Index
+    - name: Create searchable pdf pages
+      run: |
+
+        mkdir -p pdf-index
+
+        find platos -iname "*.pdf" | while read pdf
+        do
+
+          name=$(basename "$pdf" .pdf)
+
+          pdftotext "$pdf" -
+
+          pdftotext "$pdf" "pdf-index/${name}.txt"
+
+          cat > "pdf-index/${name}.html" << EOF
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>${name}</title>
+</head>
+<body>
+
+<h1>${name}</h1>
+
+<p>
+../${pdf}Abrir PDF</a>
+</p>
+
+<pre>
+$(cat "pdf-index/${name}.txt")
+</pre>
+
+</body>
+</html>
+EOF
+
+        done
+
+    - name: Generate Search Index
       run: pagefind --site .
 
-    - name: Upload Artifact
+    - name: Upload artifact
       uses: actions/upload-pages-artifact@v3
       with:
         path: .
@@ -43,8 +88,9 @@ jobs:
 
     environment:
       name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
-      - name: Deploy
-        id: deployment
-        uses: actions/deploy-pages@v4
+    - name: Deploy
+      id: deployment
+      uses: actions/deploy-pages@v4
