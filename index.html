@@ -4,9 +4,48 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Mis Recetas</title>
+<title>Mi Recetario</title>
 
 <style>
+
+:root{
+
+    --bg:#0f172a;
+    --bg-gradient:#111827;
+
+    --card:#1e293b;
+    --card-hover:#29384d;
+
+    --text:#f8fafc;
+    --muted:#94a3b8;
+
+    --border:#334155;
+
+    --primary:#3b82f6;
+    --primary-soft:rgba(59,130,246,.15);
+
+    --shadow:0 15px 35px rgba(0,0,0,.3);
+}
+
+body.light{
+
+    --bg:#f3f6fb;
+    --bg-gradient:#ffffff;
+
+    --card:#ffffff;
+    --card-hover:#f8fafc;
+
+    --text:#1f2937;
+    --muted:#64748b;
+
+    --border:#e2e8f0;
+
+    --primary:#2563eb;
+    --primary-soft:rgba(37,99,235,.08);
+
+    --shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
 *{
     margin:0;
     padding:0;
@@ -14,126 +53,269 @@
 }
 
 body{
-    font-family: "Segoe UI", Arial, sans-serif;
-    background: linear-gradient(135deg,#f4f6f8,#e9eef3);
+    font-family:Segoe UI, Arial, sans-serif;
+
+    background:
+    radial-gradient(circle at top left,var(--bg-gradient),var(--bg));
+
+    color:var(--text);
+
     min-height:100vh;
-    color:#222;
+
     padding:40px 20px;
+
+    transition:.3s;
 }
 
 .container{
-    max-width:1200px;
+    max-width:1300px;
     margin:auto;
+}
+
+.topbar{
+
+    display:flex;
+    justify-content:flex-end;
+    margin-bottom:20px;
+}
+
+.theme-btn{
+
+    border:none;
+
+    background:var(--card);
+
+    color:var(--text);
+
+    border:1px solid var(--border);
+
+    border-radius:999px;
+
+    padding:10px 16px;
+
+    cursor:pointer;
+
+    box-shadow:var(--shadow);
+
+    transition:.2s;
+}
+
+.theme-btn:hover{
+    transform:translateY(-2px);
 }
 
 header{
     text-align:center;
-    margin-bottom:35px;
+    margin-bottom:40px;
 }
 
 header h1{
-    font-size:3rem;
-    color:#1f2937;
+
+    font-size:3.2rem;
+    font-weight:700;
+
+    letter-spacing:-1px;
+
     margin-bottom:10px;
 }
 
 header p{
-    color:#6b7280;
-    font-size:1.1rem;
+
+    color:var(--muted);
+
+    font-size:1.05rem;
 }
 
-.search-box{
+.search-container{
+
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    border-radius:24px;
+
+    padding:25px;
+
+    margin-bottom:30px;
+
+    box-shadow:var(--shadow);
+}
+
+.search-wrapper{
     position:relative;
-    margin-bottom:40px;
 }
 
-.search-box input{
-    width:100%;
-    padding:18px 20px 18px 55px;
-    border:none;
-    border-radius:16px;
-    font-size:1.1rem;
-    background:white;
-    box-shadow:0 5px 20px rgba(0,0,0,0.08);
-    transition:0.3s;
-}
+.search-wrapper::before{
 
-.search-box input:focus{
-    outline:none;
-    box-shadow:0 5px 25px rgba(59,130,246,0.3);
-}
+    content:"🔎";
 
-.search-box::before{
-    content:"🔍";
     position:absolute;
+
     left:18px;
-    top:16px;
+    top:15px;
+
     font-size:22px;
 }
 
-.seccion{
-    background:white;
-    border-radius:20px;
-    padding:25px;
-    margin-bottom:30px;
-    box-shadow:0 5px 25px rgba(0,0,0,.08);
+.search-wrapper input{
+
+    width:100%;
+
+    padding:18px 20px 18px 55px;
+
+    border-radius:16px;
+
+    border:1px solid var(--border);
+
+    background:var(--bg);
+
+    color:var(--text);
+
+    font-size:18px;
+
+    transition:.2s;
 }
 
-.seccion h2{
+.search-wrapper input:focus{
+
+    outline:none;
+
+    border-color:var(--primary);
+
+    box-shadow:0 0 0 4px rgba(59,130,246,.15);
+}
+
+.stats{
+
+    margin-top:18px;
+
     display:flex;
-    align-items:center;
-    justify-content:space-between;
-    margin-bottom:20px;
-    color:#1f2937;
+
+    gap:12px;
+
+    flex-wrap:wrap;
 }
 
-.contador{
-    background:#eef2ff;
-    color:#4338ca;
-    font-size:0.9rem;
-    padding:5px 12px;
+.badge{
+
+    padding:8px 14px;
+
     border-radius:999px;
+
+    background:var(--primary-soft);
+
+    color:var(--primary);
+
+    font-weight:600;
+}
+
+.section{
+
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    border-radius:24px;
+
+    padding:25px;
+
+    margin-bottom:25px;
+
+    box-shadow:var(--shadow);
+}
+
+.section-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    flex-wrap:wrap;
+
+    gap:10px;
+
+    margin-bottom:20px;
+}
+
+.section-header h2{
+    font-size:1.6rem;
+}
+
+.counter{
+
+    background:var(--primary-soft);
+
+    color:var(--primary);
+
+    border-radius:999px;
+
+    padding:8px 14px;
+
+    font-weight:600;
 }
 
 .lista{
+
     display:grid;
-    grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
-    gap:10px;
+
+    grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+
+    gap:14px;
 }
 
 .resultado a{
-    display:block;
-    padding:14px 16px;
-    background:#f8fafc;
-    border:1px solid #e5e7eb;
-    border-radius:12px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
     text-decoration:none;
-    color:#111827;
+
+    color:var(--text);
+
+    background:var(--bg);
+
+    border:1px solid var(--border);
+
+    border-radius:14px;
+
+    padding:16px;
+
     transition:.2s;
 }
 
 .resultado a:hover{
-    background:#2563eb;
-    color:white;
-    transform:translateY(-2px);
+
+    transform:translateY(-3px);
+
+    border-color:var(--primary);
+
+    background:var(--card-hover);
+}
+
+.pdf{
+    font-size:22px;
 }
 
 .sin-resultados{
-    color:#6b7280;
-    padding:10px 0;
-}
 
-footer{
-    text-align:center;
-    margin-top:40px;
-    color:#6b7280;
-    font-size:.9rem;
+    padding:12px;
+
+    color:var(--muted);
 }
 
 @media(max-width:768px){
 
+    body{
+        padding:20px 10px;
+    }
+
     header h1{
-        font-size:2rem;
+        font-size:2.2rem;
     }
 
     .lista{
@@ -141,50 +323,113 @@ footer{
     }
 
 }
+
 </style>
 </head>
+
 <body>
 
 <div class="container">
 
-<header>
-    <h1>🍽️ Recetas</h1>
-</header>
+    <div class="topbar">
+        <button id="themeToggle" class="theme-btn">
+            ☀️ / 🌙
+        </button>
+    </div>
 
-<div class="search-box">
-    <input
-        type="text"
-        id="buscar"
-        placeholder="Buscar receta..."
-        autofocus>
-</div>
+    <header>
+        <h1>📖 Recetario</h1>
+    </header>
 
-<div class="seccion">
-    <h2>
-        ⭐ Favoritas
-        <span class="contador" id="countFavoritas">0</span>
-    </h2>
-    <div id="favoritas" class="lista"></div>
-</div>
+    <div class="search-container">
 
-<div class="seccion">
-    <h2>
-        📚 Todas las recetas
-        <span class="contador" id="countResto">0</span>
-    </h2>
-    <div id="resto" class="lista"></div>
-</div>
+        <div class="search-wrapper">
+            <input
+                type="text"
+                id="buscar"
+                placeholder="Buscar receta..."
+                autofocus>
+        </div>
 
-<footer>
-    Recetario personal · GitHub Pages
-</footer>
+        <div class="stats">
+
+            <div class="badge">
+                ⭐ Favoritas:
+                <span id="countFavoritas">0</span>
+            </div>
+
+            <div class="badge">
+                📚 Total:
+                <span id="countTotal">0</span>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="section">
+
+        <div class="section-header">
+
+            <h2>⭐ Favoritas</h2>
+
+            <div
+                class="counter"
+                id="favoritasCounter">
+                0 recetas
+            </div>
+
+        </div>
+
+        <div id="favoritas" class="lista"></div>
+
+    </div>
+
+    <div class="section">
+
+        <div class="section-header">
+
+            <h2>📚 Resto de recetas</h2>
+
+            <div
+                class="counter"
+                id="restoCounter">
+                0 recetas
+            </div>
+
+        </div>
+
+        <div id="resto" class="lista"></div>
+
+    </div>
 
 </div>
 
 <script>
 
+const temaGuardado = localStorage.getItem('tema');
+
+if(temaGuardado === 'light'){
+    document.body.classList.add('light');
+}
+
+document
+.getElementById('themeToggle')
+.addEventListener('click', () => {
+
+    document.body.classList.toggle('light');
+
+    localStorage.setItem(
+        'tema',
+        document.body.classList.contains('light')
+            ? 'light'
+            : 'dark'
+    );
+
+});
+
 fetch('pdfs.json')
-.then(response => response.json())
+.then(r => r.json())
 .then(pdfs => {
 
     const favoritas = pdfs.filter(pdf =>
@@ -195,27 +440,38 @@ fetch('pdfs.json')
         !pdf.ruta.toLowerCase().startsWith('favoritas/')
     );
 
-    function pintar(lista, contenedor, contador, filtro){
+    document.getElementById('countTotal').textContent =
+        pdfs.length;
+
+    function pintar(
+        lista,
+        contenedor,
+        contador,
+        filtro
+    ){
 
         filtro = filtro.toLowerCase().trim();
 
         const encontrados = lista.filter(pdf =>
-            pdf.nombre.toLowerCase().includes(filtro)
+            pdf.nombre
+               .toLowerCase()
+               .includes(filtro)
         );
 
         document.getElementById(contador).textContent =
-            encontrados.length;
+            encontrados.length + " recetas";
 
         document.getElementById(contenedor).innerHTML =
             encontrados.length
-                ? encontrados.map(pdf => `
-                    <div class="resultado">
-                        <a href="${pdf.ruta}" target="_blank">
-                            📄 ${pdf.nombre}
-                        </a>
-                    </div>
-                `).join('')
-                : '<div class="sin-resultados">No se encontraron recetas</div>';
+            ? encontrados.map(pdf => `
+                <div class="resultado">
+                    <a href="${pdf.ruta}" target="_blank">
+                        <span class="pdf">📄</span>
+                        <span>${pdf.nombre}</span>
+                    </a>
+                </div>
+            `).join('')
+            : '<div class="sin-resultados">No se encontraron recetas.</div>';
     }
 
     function actualizar(){
@@ -223,24 +479,40 @@ fetch('pdfs.json')
         const filtro =
             document.getElementById('buscar').value;
 
+        const favoritasFiltradas =
+            favoritas.filter(pdf =>
+                pdf.nombre
+                   .toLowerCase()
+                   .includes(
+                       filtro.toLowerCase().trim()
+                   )
+            );
+
+        document.getElementById('countFavoritas').textContent =
+            favoritasFiltradas.length;
+
         pintar(
             favoritas,
             'favoritas',
-            'countFavoritas',
+            'favoritasCounter',
             filtro
         );
 
         pintar(
             resto,
             'resto',
-            'countResto',
+            'restoCounter',
             filtro
         );
+
     }
 
     document
-        .getElementById('buscar')
-        .addEventListener('input', actualizar);
+    .getElementById('buscar')
+    .addEventListener(
+        'input',
+        actualizar
+    );
 
     actualizar();
 
