@@ -30,7 +30,7 @@ jobs:
 
           pdfs = []
 
-          for carpeta in ["entrantes", "platos", "postres","favoritas","resto"]:
+          for carpeta in ["favoritas","resto"]:
               if not os.path.isdir(carpeta):
                   continue
 
