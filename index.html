@@ -482,9 +482,6 @@ fetch('pdfs.json')
         !pdf.ruta.toLowerCase().startsWith('favoritas/')
     );
 
-    document.getElementById('countTotal').textContent =
-        pdfs.length;
-
     function pintar(
         lista,
         contenedor,
@@ -523,8 +520,15 @@ fetch('pdfs.json')
             coincideBusqueda(pdf.nombre, filtro)
         );
 
+        const restoFiltradas = resto.filter(pdf =>
+            coincideBusqueda(pdf.nombre, filtro)
+        );
+
         document.getElementById('countFavoritas').textContent =
             favoritasFiltradas.length;
+
+        document.getElementById('countTotal').textContent =
+            favoritasFiltradas.length + restoFiltradas.length;
 
         pintar(
             favoritas,
