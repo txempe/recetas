@@ -340,7 +340,7 @@ header p{
     text-align:center;
 }
 
-    .section-header h2{
+.section-header h2{
     flex-basis:auto;
 }
 
@@ -413,7 +413,7 @@ header p{
 
         <div class="section-header">
 
-            <h2>📚 Recetas</h2>
+            <h2>📚 Resto de recetas</h2>
 
             <div
                 class="counter"
@@ -430,6 +430,12 @@ header p{
 </div>
 
 <script>
+
+function coincideBusqueda(nombre, filtro){
+    const texto = nombre.toLowerCase();
+    const palabras = filtro.toLowerCase().trim().split(/\s+/).filter(Boolean);
+    return palabras.every(palabra => texto.includes(palabra));
+}
 
 const favoritasToggle = document.getElementById('favoritasToggle');
 const favoritasSection = document.getElementById('favoritasSection');
@@ -489,9 +495,7 @@ fetch('pdfs.json')
         filtro = filtro.toLowerCase().trim();
 
         const encontrados = lista.filter(pdf =>
-            pdf.nombre
-               .toLowerCase()
-               .includes(filtro)
+            coincideBusqueda(pdf.nombre, filtro)
         );
 
         document.getElementById(contador).textContent =
@@ -515,14 +519,9 @@ fetch('pdfs.json')
         const filtro =
             document.getElementById('buscar').value;
 
-        const favoritasFiltradas =
-            favoritas.filter(pdf =>
-                pdf.nombre
-                   .toLowerCase()
-                   .includes(
-                       filtro.toLowerCase().trim()
-                   )
-            );
+        const favoritasFiltradas = favoritas.filter(pdf =>
+            coincideBusqueda(pdf.nombre, filtro)
+        );
 
         document.getElementById('countFavoritas').textContent =
             favoritasFiltradas.length;
