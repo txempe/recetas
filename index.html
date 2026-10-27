@@ -75,7 +75,9 @@ body{
 .topbar{
 
     display:flex;
-    justify-content:flex-end;
+    justify-content:space-between;
+    align-items:center;
+    gap:12px;
     margin-bottom:10px;
 }
 
@@ -326,6 +328,10 @@ header p{
 
 }
 
+[hidden]{
+    display:none !important;
+}
+
 </style>
 </head>
 
@@ -334,6 +340,10 @@ header p{
 <div class="container">
 
     <div class="topbar">
+        <button id="favoritasToggle" class="theme-btn" type="button"
+                aria-controls="favoritasSection" aria-expanded="false">
+            ⭐ Mostrar favoritas
+        </button>
         <button id="themeToggle" class="theme-btn">
             ☀️ / 🌙
         </button>
@@ -369,7 +379,7 @@ header p{
 
     </div>
 
-    <div class="section">
+    <div class="section" id="favoritasSection" hidden>
 
         <div class="section-header">
 
@@ -408,6 +418,18 @@ header p{
 </div>
 
 <script>
+
+const favoritasToggle = document.getElementById('favoritasToggle');
+const favoritasSection = document.getElementById('favoritasSection');
+
+favoritasToggle.addEventListener('click', () => {
+    const mostrar = favoritasSection.hidden;
+    favoritasSection.hidden = !mostrar;
+    favoritasToggle.setAttribute('aria-expanded', String(mostrar));
+    favoritasToggle.textContent = mostrar
+        ? '⭐ Ocultar favoritas'
+        : '⭐ Mostrar favoritas';
+});
 
 const temaGuardado = localStorage.getItem('tema');
 
