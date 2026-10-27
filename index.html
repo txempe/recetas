@@ -62,7 +62,7 @@ body{
 
     min-height:100vh;
 
-    padding:40px 20px;
+    padding:22px 20px;
 
     transition:.3s;
 }
@@ -76,7 +76,7 @@ body{
 
     display:flex;
     justify-content:flex-end;
-    margin-bottom:20px;
+    margin-bottom:10px;
 }
 
 .theme-btn{
@@ -91,7 +91,7 @@ body{
 
     border-radius:999px;
 
-    padding:10px 16px;
+    padding:7px 16px;
 
     cursor:pointer;
 
@@ -106,7 +106,7 @@ body{
 
 header{
     text-align:center;
-    margin-bottom:40px;
+    margin-bottom:20px;
 }
 
 header h1{
@@ -116,7 +116,7 @@ header h1{
 
     letter-spacing:-1px;
 
-    margin-bottom:10px;
+    margin-bottom:0;
 }
 
 header p{
@@ -134,9 +134,9 @@ header p{
 
     border-radius:24px;
 
-    padding:25px;
+    padding:16px 25px;
 
-    margin-bottom:30px;
+    margin-bottom:16px;
 
     box-shadow:var(--shadow);
 }
@@ -152,7 +152,9 @@ header p{
     position:absolute;
 
     left:18px;
-    top:15px;
+    top:50%;
+    transform:translateY(-50%);
+    pointer-events:none;
 
     font-size:22px;
 }
@@ -161,7 +163,7 @@ header p{
 
     width:100%;
 
-    padding:18px 20px 18px 55px;
+    padding:11px 20px 11px 55px;
 
     border-radius:16px;
 
@@ -187,7 +189,7 @@ header p{
 
 .stats{
 
-    margin-top:18px;
+    margin-top:10px;
 
     display:flex;
 
@@ -198,7 +200,7 @@ header p{
 
 .badge{
 
-    padding:8px 14px;
+    padding:5px 14px;
 
     border-radius:999px;
 
@@ -217,9 +219,9 @@ header p{
 
     border-radius:24px;
 
-    padding:25px;
+    padding:16px 25px;
 
-    margin-bottom:25px;
+    margin-bottom:16px;
 
     box-shadow:var(--shadow);
 }
@@ -236,7 +238,7 @@ header p{
 
     gap:10px;
 
-    margin-bottom:20px;
+    margin-bottom:10px;
 }
 
 .section-header h2{
@@ -251,7 +253,7 @@ header p{
 
     border-radius:999px;
 
-    padding:8px 14px;
+    padding:5px 14px;
 
     font-weight:600;
 }
@@ -262,7 +264,7 @@ header p{
 
     grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
 
-    gap:14px;
+    gap:8px;
 }
 
 .resultado a{
@@ -283,7 +285,7 @@ header p{
 
     border-radius:14px;
 
-    padding:16px;
+    padding:9px 16px;
 
     transition:.2s;
 }
@@ -311,7 +313,7 @@ header p{
 @media(max-width:768px){
 
     body{
-        padding:20px 10px;
+        padding:12px 10px;
     }
 
     header h1{
